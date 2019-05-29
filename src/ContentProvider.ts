@@ -53,8 +53,8 @@ export default class ContentProvider {
 										<div class="panel__switcher"></div>
 										<div class="panel__content">
 											<div class="layers-container"></div>
-											<div class="styles-container"></div>
-											<div class="traits-container"></div>
+											<div class="styles-container" style="display: none;"></div>
+											<div class="traits-container" style="display: none;"></div>
 										</div>
 									</div>
 								</div>

@@ -17,8 +17,8 @@
 					id: 'layers',
 					el: '.panel__right',
 					resizable: {
-						maxDim: 350,
-						minDim: 200,
+						maxDim: 550,
+						minDim: 250,
 						tc: 0, // Top handler
 						cl: 1, // Left handler
 						cr: 0, // Right handler
@@ -34,22 +34,22 @@
 					buttons: [
 						{
 							id: 'show-layers',
+							className: 'fa fa-bars',
 							active: true,
-							label: 'Layers',
 							command: 'show-layers',
 							togglable: false
 						},
 						{
 							id: 'show-styles',
-							active: true,
-							label: 'Styles',
+							className: 'fa fa-paint-brush',
+							active: false,
 							command: 'show-styles',
 							togglable: false
 						},
 						{
 							id: 'show-traits',
-							active: true,
-							label: 'Traits',
+							className: 'fa fa-cog',
+							active: false,
 							command: 'show-traits',
 							togglable: false
 						}
@@ -64,7 +64,43 @@
 			appendTo: '.styles-container'
 		},
 		styleManager: {
-			appendTo: '.styles-container'
+			appendTo: '.styles-container',
+			sectors: [
+				{
+					name: 'General',
+					open: false,
+					buildProps: ['float', 'display', 'position', 'top', 'right', 'left', 'bottom'],
+				},
+				{
+					name: 'Layout',
+					open: false,
+					buildProps: ['width', 'height', 'max-width', 'min-height', 'margin', 'padding'],
+				},
+				{
+					name: 'Typography',
+					open: false,
+					buildProps: ['font-family', 'font-size', 'font-weight', 'letter-spacing', 'color', 'line-height', 'text-align', 'text-shadow'],
+					properties: [{
+						property: 'text-align',
+						list: [
+							{ value: 'left', className: 'fa fa-align-left' },
+							{ value: 'center', className: 'fa fa-align-center' },
+							{ value: 'right', className: 'fa fa-align-right' },
+							{ value: 'justify', className: 'fa fa-align-justify' },
+						],
+					}]
+				},
+				{
+					name: 'Decorations',
+					open: false,
+					buildProps: ['border-radius-c', 'background-color', 'border-radius', 'border', 'box-shadow', 'background'],
+				},
+				{
+					name: 'Extra',
+					open: false,
+					buildProps: ['transition', 'perspective', 'transform'],
+				}
+			]
 		},
 		traitManager: {
 			appendTo: '.traits-container',

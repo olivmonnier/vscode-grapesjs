@@ -38,11 +38,14 @@ body {
 }
 
 .panel__right {
-  flex-basis: 230px;
+  flex-basis: 250px;
   position: relative;
 	overflow-y: auto;
 }
 
 .panel__switcher {
 	position: initial;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
