@@ -1,0 +1,49 @@
+{
+	"name": "grapes",
+	"description": "",
+	"version": "0.0.1",
+	"publisher": "vscode-samples",
+	"engines": {
+		"vscode": "^1.33.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"preview": true,
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "grapes.showPanel",
+				"title": "Toggle Grapes panel"
+			}
+		],
+		"menus": {
+			"editor/title": [
+				{
+					"when": "resourceLangId == html",
+					"command": "grapes.showPanel",
+					"alt": "grapes.showPanel",
+					"group": "navigation"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc  -p ./",
+		"lint": "tslint -p ./",
+		"watch": "tsc -w -p ./"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"@types/node": "^10.5.2",
+		"@types/vscode": "^1.32.0",
+		"grapesjs": "^0.14.61",
+		"tslint": "^5.16.0",
+		"typescript": "^3.4.5"
+	}
+}

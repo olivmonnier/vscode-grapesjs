@@ -1,0 +1,48 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+}
+body {
+	background-color: aliceblue;
+}
+
+#root {
+	height: 100%;
+}
+
+#gjs {
+	width: 100%;
+	height: 100%;
+}
+
+.gjs-cv-canvas {
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.editor-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  height: 100%;
+}
+
+.editor-canvas {
+	flex-grow: 1;
+	flex-basis: 100%;
+  overflow: auto;
+}
+
+.panel__right {
+  flex-basis: 230px;
+  position: relative;
+	overflow-y: auto;
+}
+
+.panel__switcher {
+	position: initial;
+}
