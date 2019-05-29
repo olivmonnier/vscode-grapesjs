@@ -2,7 +2,7 @@ import { Uri, ExtensionContext, Extension } from "vscode";
 import { join } from "path";
 
 export default class ContentProvider {
-	getContent(context: ExtensionContext) {
+	getContent(context: ExtensionContext, content?: string | undefined) {
 		const scriptPathOnDisk1 = Uri.file(
 			join(context.extensionPath, 'public', 'js', 'grapes.min.js')
 		);
@@ -46,7 +46,7 @@ export default class ContentProvider {
 								<div class="editor-row">
 									<div class="editor-canvas">
 										<div id="gjs">
-											<h1>Hello World Component!</h1>
+											${content || "<h1>Hello World Component!</h1>"}
 										</div>
 									</div>
 									<div class="panel__right">

@@ -111,4 +111,14 @@
 			this.getTraitsEl(editor).style.display = 'none';
 		},
 	});
+
+	window.addEventListener('message', event => {
+		const message = event.data;
+		
+		switch (message.command) {
+			case 'change':
+				editor.setComponents(message.content);
+				return;
+		}
+	})
 }(window));

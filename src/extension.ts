@@ -1,6 +1,7 @@
 import * as path from 'path';
 import * as vscode from 'vscode';
 import ContentProvider from './ContentProvider';
+import Manager from './Manager';
 
 export function activate(context: vscode.ExtensionContext) {
 	const contentProvider = new ContentProvider();
@@ -23,13 +24,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 		currentPanel.webview.html = contentProvider.getContent(context);
 
-		currentPanel.webview.onDidReceiveMessage(
-			message => {
-
-			},
-			undefined,
-			context.subscriptions
-		);
+		const manager = new Manager(currentPanel);
 
 		currentPanel.onDidDispose(
 			() => {
