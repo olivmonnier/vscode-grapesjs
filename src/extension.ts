@@ -4,10 +4,9 @@ import ContentProvider from './ContentProvider';
 import Manager from './Manager';
 
 export function activate(context: vscode.ExtensionContext) {
-	const contentProvider = new ContentProvider();
 	let currentPanel: vscode.WebviewPanel | undefined = undefined;
-
-	let disposable = vscode.commands.registerCommand('grapes.showPanel', () => {
+	const contentProvider = new ContentProvider();
+	const disposable = vscode.commands.registerCommand('grapes.showPanel', () => {
 		if (currentPanel) {
 			currentPanel.reveal(vscode.ViewColumn.Two)
 		} else {
@@ -21,8 +20,8 @@ export function activate(context: vscode.ExtensionContext) {
 				}
 			)
 		}
-
-		currentPanel.webview.html = contentProvider.getContent(context);
+		const content = vscode.window.activeTextEditor ? vscode.window.activeTextEditor.document.getText() : '';
+		currentPanel.webview.html = contentProvider.getContent(context, content);
 
 		const manager = new Manager(currentPanel);
 
