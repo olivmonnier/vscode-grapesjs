@@ -36,14 +36,20 @@
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc  -p ./",
 		"lint": "tslint -p ./",
-		"watch": "tsc -w -p ./"
+		"watch": "tsc -w -p ./",
+		"build": "webpack"
 	},
 	"dependencies": {},
 	"devDependencies": {
+		"@babel/core": "^7.4.5",
+		"@babel/preset-env": "^7.4.5",
 		"@types/node": "^10.5.2",
 		"@types/vscode": "^1.32.0",
+		"babel-loader": "^8.0.6",
 		"grapesjs": "^0.14.61",
 		"tslint": "^5.16.0",
-		"typescript": "^3.4.5"
+		"typescript": "^3.4.5",
+		"webpack": "^4.32.2",
+		"webpack-cli": "^3.3.2"
 	}
 }
