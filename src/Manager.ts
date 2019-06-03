@@ -8,7 +8,7 @@ export default class Manager {
 		this.panel = panel;
 
 		vscode.window.onDidChangeActiveTextEditor(activeEditor => {
-			if (activeEditor && activeEditor.document.languageId === "html") {
+			if (activeEditor && this.isAcceptableLaguage(activeEditor.document.languageId)) {
 				this.activeEditor = activeEditor
 			}
 		});
@@ -25,6 +25,6 @@ export default class Manager {
 	}
 
 	isAcceptableLaguage(languageId: string) {
-		return (languageId === 'html')
+		return (languageId === 'html' || languageId === 'plaintext')
 	}
 }
