@@ -3,25 +3,10 @@ import { join } from "path";
 
 export default class ContentProvider {
 	getContent(context: ExtensionContext, content?: string | undefined) {
-		const scriptPathOnDisk1 = Uri.file(
-			join(context.extensionPath, 'public', 'js', 'grapes.min.js')
+		const scriptPathOnDisk = Uri.file(
+			join(context.extensionPath, 'public', 'build', 'app.bundle.js')
 		);
-		const scriptUri1 = scriptPathOnDisk1.with({ scheme: 'vscode-resource' });
-		const scriptPathOnDisk2 = Uri.file(
-			join(context.extensionPath, 'public', 'js', 'app.js')
-		);
-		const scriptUri2 = scriptPathOnDisk2.with({ scheme: 'vscode-resource' });
-	
-		const stylePathOnDisk1 = Uri.file(
-			join(context.extensionPath, 'public', 'css', 'grapes.min.css')
-		)
-		const styleUri1 = stylePathOnDisk1.with({ scheme: 'vscode-resource' });
-		const stylePathOnDisk2 = Uri.file(
-			join(context.extensionPath, 'public', 'css', 'styles.css')
-		)
-		const styleUri2 = stylePathOnDisk2.with({ scheme: 'vscode-resource' });
-	
-		// Use a nonce to whitelist which scripts can be run
+		const scriptUri = scriptPathOnDisk.with({ scheme: 'vscode-resource' });
 		const nonce = getNonce();
 	
 		return `<!DOCTYPE html>
@@ -33,12 +18,11 @@ export default class ContentProvider {
 							Use a content security policy to only allow loading images from https or from our extension directory,
 							and only allow scripts that have a specific nonce.
 							-->
-							<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src vscode-resource: https:; style-src 'unsafe-inline' vscode-resource: https:; script-src 'nonce-${nonce}' 'unsafe-eval' https:; font-src vscode-resource: https:;">
+							<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src vscode-resource: https:; style-src 'unsafe-inline' vscode-resource: https:; script-src 'nonce-${nonce}' 'unsafe-eval' https:; font-src 'unsafe-inline' vscode-resource: https:;">
 	
 							<meta name="viewport" content="width=device-width, initial-scale=1.0">
 							<title>Cat Coding</title>
-							<link rel="stylesheet" href="${styleUri1}">
-							<link rel="stylesheet" href="${styleUri2}">
+							<script nonce="${nonce}" src="${scriptUri}"></script>
 						</head>
 						<body>
 							<div id="root">
@@ -60,8 +44,6 @@ export default class ContentProvider {
 								</div>
 							</div>
 	
-							<script nonce="${nonce}" src="${scriptUri1}"></script>
-							<script nonce="${nonce}" src="${scriptUri2}"></script>
 						</body>
 						</html>`;
 	}

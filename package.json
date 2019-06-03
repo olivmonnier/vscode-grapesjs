@@ -46,9 +46,12 @@
 		"@types/node": "^10.5.2",
 		"@types/vscode": "^1.32.0",
 		"babel-loader": "^8.0.6",
-		"grapesjs": "^0.14.61",
+		"css-loader": "^2.1.1",
+		"grapesjs": "^0.14.62",
+		"style-loader": "^0.23.1",
 		"tslint": "^5.16.0",
 		"typescript": "^3.4.5",
+		"url-loader": "^1.1.2",
 		"webpack": "^4.32.2",
 		"webpack-cli": "^3.3.2"
 	}

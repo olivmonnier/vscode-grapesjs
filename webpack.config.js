@@ -18,6 +18,14 @@ module.exports = {
 						presets: ['@babel/preset-env']
 					}
 				}
+			},
+			{
+				test: /\.css$/i,
+				use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+			},
+			{
+				test: /\.(woff|woff2|eot|ttf|png|jp(e*)g|gif|svg)$/,
+				use: 'url-loader'
 			}
 		]
 	}
