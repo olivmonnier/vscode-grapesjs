@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -7,11 +8,13 @@ module.exports = {
 		path: path.resolve(__dirname, 'public/build'),
 		filename: 'app.bundle.js'
 	},
+	externals: {
+		grapesjs: 'grapesjs'
+	},
 	module: {
 		rules: [
 			{
 				test: /\.m?js$/,
-				exclude: /(node_modules|bower_components)/,
 				use: {
 					loader: 'babel-loader',
 					options: {
@@ -28,5 +31,10 @@ module.exports = {
 				use: 'url-loader'
 			}
 		]
-	}
+	},
+	plugins: [
+    new CopyPlugin([
+      'node_modules/grapesjs/dist'
+    ]),
+  ]
 }

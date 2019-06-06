@@ -3,6 +3,10 @@ import { join } from "path";
 
 export default class ContentProvider {
 	getContent(context: ExtensionContext, content?: string | undefined) {
+		const vendorPathOnDisk = Uri.file(
+			join(context.extensionPath, 'public', 'build', 'grapes.min.js')
+		);
+		const vendorUri = vendorPathOnDisk.with({ scheme: 'vscode-resource' });
 		const scriptPathOnDisk = Uri.file(
 			join(context.extensionPath, 'public', 'build', 'app.bundle.js')
 		);
@@ -18,11 +22,11 @@ export default class ContentProvider {
 							Use a content security policy to only allow loading images from https or from our extension directory,
 							and only allow scripts that have a specific nonce.
 							-->
-							<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src vscode-resource: https:; style-src 'unsafe-inline' vscode-resource: https:; script-src 'nonce-${nonce}' 'unsafe-eval' https:; font-src 'unsafe-inline' vscode-resource: https:;">
+							<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data: vscode-resource: https:; style-src 'self' data: 'unsafe-inline' vscode-resource: https:; script-src 'self' data: 'nonce-${nonce}' 'unsafe-eval' https:; font-src 'self' data: 'unsafe-inline' vscode-resource: https:;">
 	
 							<meta name="viewport" content="width=device-width, initial-scale=1.0">
-							<title>Cat Coding</title>
-							<script nonce="${nonce}" src="${scriptUri}"></script>
+							<title>GrapesJS</title>
+							
 						</head>
 						<body>
 							<div id="root">
@@ -43,7 +47,8 @@ export default class ContentProvider {
 									</div>
 								</div>
 							</div>
-	
+							<script nonce="${nonce}" src="${vendorUri}"></script>
+							<script nonce="${nonce}" src="${scriptUri}"></script>
 						</body>
 						</html>`;
 	}

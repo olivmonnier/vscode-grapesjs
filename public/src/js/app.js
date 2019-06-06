@@ -1,4 +1,3 @@
-import "../../../node_modules/grapesjs/dist/css/grapes.min.css";
 import "../css/styles.css";
 
 import grapesjs from 'grapesjs';
