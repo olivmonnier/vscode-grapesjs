@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { debounced } from './utils';
 
 export default class Manager {
 	private activeEditor: vscode.TextEditor | undefined;
@@ -13,15 +14,18 @@ export default class Manager {
 			}
 		});
 
-		vscode.workspace.onDidChangeTextDocument(({ document }) => {
-			if (this.activeEditor && this.isAcceptableLaguage(document.languageId)) {
-				const content = this.activeEditor.document.getText();
-				this.panel.webview.postMessage({
-					command: 'change',
-					content
-				})
-			}
-		});
+		vscode.workspace.onDidChangeTextDocument(debounced(1500, this.onChangeTextDocument.bind(this)));
+	}
+
+	private onChangeTextDocument(event: vscode.TextDocumentChangeEvent) {
+		const { document } = event;
+		if (this.activeEditor && this.isAcceptableLaguage(document.languageId)) {
+			const content = this.activeEditor.document.getText();
+			this.panel.webview.postMessage({
+				command: 'change',
+				content
+			})
+		}
 	}
 
 	isAcceptableLaguage(languageId: string) {
