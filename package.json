@@ -46,6 +46,7 @@
 		"@types/node": "^10.5.2",
 		"@types/vscode": "^1.32.0",
 		"babel-loader": "^8.0.6",
+		"clean-webpack-plugin": "^3.0.0",
 		"css-loader": "^2.1.1",
 		"grapesjs": "^0.14.62",
 		"style-loader": "^0.23.1",

@@ -1,4 +1,4 @@
-const webpack = require('webpack');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -28,5 +28,8 @@ module.exports = {
 				use: 'url-loader'
 			}
 		]
-	}
+	},
+	plugins: [
+		new CleanWebpackPlugin()
+	]
 }
