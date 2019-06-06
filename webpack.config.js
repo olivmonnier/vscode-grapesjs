@@ -1,11 +1,26 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require('webpack');
 const path = require('path');
 
-module.exports = {
-	entry: "./public/src/js/app.js",
+module.exports = env => ({
+	entry: {
+		app: "./public/src/js/app.js"
+	},
 	output: {
 		path: path.resolve(__dirname, 'public/build'),
-		filename: 'app.bundle.js'
+		filename: '[name].bundle.js'
+	},
+	optimization: {
+    splitChunks: {
+        cacheGroups: {
+            vendors: {
+                test: /[\\/]node_modules[\\/]/,
+                name: 'vendors',
+                enforce: true,
+                chunks: 'all'
+            }
+        }
+    }
 	},
 	module: {
 		rules: [
@@ -30,6 +45,9 @@ module.exports = {
 		]
 	},
 	plugins: [
-		new CleanWebpackPlugin()
+		new CleanWebpackPlugin(),
+    new webpack.DefinePlugin({
+      PRODUCTION: env.production === true
+    })
 	]
-}
+})

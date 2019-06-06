@@ -37,7 +37,7 @@
 		"compile": "tsc  -p ./",
 		"lint": "tslint -p ./",
 		"watch": "tsc -w -p ./",
-		"build": "webpack"
+		"build": "webpack --env.production --config ./webpack.config.js"
 	},
 	"dependencies": {},
 	"devDependencies": {

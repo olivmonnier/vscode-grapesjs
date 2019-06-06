@@ -3,6 +3,10 @@ import { join } from "path";
 
 export default class ContentProvider {
 	getContent(context: ExtensionContext, content?: string | undefined) {
+		const vendorsPathOnDisk = Uri.file(
+			join(context.extensionPath, 'public', 'build', 'vendors.bundle.js')
+		);
+		const vendorsUri = vendorsPathOnDisk.with({ scheme: 'vscode-resource' });
 		const scriptPathOnDisk = Uri.file(
 			join(context.extensionPath, 'public', 'build', 'app.bundle.js')
 		);
@@ -21,8 +25,8 @@ export default class ContentProvider {
 							<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data: vscode-resource: https:; style-src 'unsafe-inline' vscode-resource: https:; script-src 'nonce-${nonce}' 'unsafe-eval' https:; font-src 'self' data: 'unsafe-inline' vscode-resource: https:;">
 	
 							<meta name="viewport" content="width=device-width, initial-scale=1.0">
-							<title>Cat Coding</title>
-							
+							<title>GrapesJS</title>
+							<script nonce="${nonce}" src="${vendorsUri}"></script>
 						</head>
 						<body>
 							<div id="root">
