@@ -3,6 +3,8 @@ import "../css/styles.css";
 
 import grapesjs from 'grapesjs';
 
+const vscode = acquireVsCodeApi();
+
 const editor = grapesjs.init({
 	// Indicate where to init the editor. You can also pass an HTMLElement
 	container: '#gjs',
@@ -56,6 +58,11 @@ const editor = grapesjs.init({
 						active: false,
 						command: 'show-traits',
 						togglable: false
+					},
+					{
+						id: 'export-content',
+						label: 'Export',
+						command: 'call-vscode-export'
 					}
 				]
 			}
@@ -142,6 +149,15 @@ const editor = grapesjs.init({
 				stop(editor) {
 					const trEl = editor.getContainer().closest('.editor-row').querySelector('.traits-container');
 					trEl.style.display = 'none';
+				}
+			},
+			{
+				id: 'call-vscode-export',
+				run(editor) {
+					vscode.postMessage({
+						command: 'export',
+						content: { html: editor.getHtml(), css: editor.getCss() }
+					})
 				}
 			}
 		]

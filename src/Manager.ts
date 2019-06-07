@@ -50,6 +50,17 @@ export default class GrapesEditorManager {
 		this._panel = panel;
 		this._panel.webview.html = contentProvider.getContent(context, activeContent);
 		this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
+		this._panel.webview.onDidReceiveMessage(
+			message => {
+				switch(message.command) {
+					case 'export':
+						vscode.workspace.openTextDocument({content: message.content.html}).then(doc => vscode.window.showTextDocument(doc))
+						return;
+				}
+			},
+			null,
+			this._disposables
+		)
 
 		vscode.window.onDidChangeActiveTextEditor(activeEditor => {
 			if (activeEditor && this.isAcceptableLaguage(activeEditor.document.languageId)) {
