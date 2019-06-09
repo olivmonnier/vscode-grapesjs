@@ -4,7 +4,6 @@ import { debounced } from './utils';
 
 const contentProvider = new ContentProvider();
 
-
 export default class GrapesEditorManager {
 	public static currentPanel: GrapesEditorManager | undefined;
 	public static viewType = 'grapes.editor';
@@ -38,6 +37,7 @@ export default class GrapesEditorManager {
 		const { document } = event;
 		if (this._activeEditor && this.isAcceptableLaguage(document.languageId)) {
 			const content = this._activeEditor.document.getText();
+
 			this._panel.webview.postMessage({
 				command: 'change',
 				content
@@ -54,7 +54,13 @@ export default class GrapesEditorManager {
 			message => {
 				switch(message.command) {
 					case 'export':
-						vscode.workspace.openTextDocument({content: message.content.html}).then(doc => vscode.window.showTextDocument(doc))
+						const { html, css } = message.content;
+
+						vscode.workspace.openTextDocument({
+							language: "html",
+							content: contentProvider.exportMockup(html, css)
+						})
+						.then(doc => vscode.window.showTextDocument(doc))
 						return;
 				}
 			},

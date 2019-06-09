@@ -2,7 +2,7 @@ import { Uri, ExtensionContext, Extension } from "vscode";
 import { join } from "path";
 
 export default class ContentProvider {
-	getContent(context: ExtensionContext, content?: string | undefined) {
+	public getContent(context: ExtensionContext, content?: string | undefined) {
 		const vendorsPathOnDisk = Uri.file(
 			join(context.extensionPath, 'public', 'build', 'vendors.bundle.js')
 		);
@@ -50,6 +50,23 @@ export default class ContentProvider {
 							<script nonce="${nonce}" src="${scriptUri}"></script>
 						</body>
 						</html>`;
+	}
+
+	public exportMockup(html: string, css: string) { 
+		return `<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title></title>
+		<style>
+			${css}
+		</style>
+	</head>
+	<body>
+		${html}
+	</body>
+</html>`
 	}
 }
 function getNonce() {
