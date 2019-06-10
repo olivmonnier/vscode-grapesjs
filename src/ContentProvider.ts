@@ -1,4 +1,5 @@
 import { Uri, ExtensionContext, Extension } from "vscode";
+import * as cheerio from 'cheerio';
 import { join } from "path";
 
 export default class ContentProvider {
@@ -53,20 +54,37 @@ export default class ContentProvider {
 	}
 
 	public exportMockup(html: string, css: string) { 
-		return `<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title></title>
-		<style>
-			${css}
-		</style>
-	</head>
-	<body>
-		${html}
-	</body>
-</html>`
+		let mockup;
+
+		if (this.isHeadInHtml(html)) {
+			mockup = html;
+		} else {
+			mockup = `<!DOCTYPE html>
+			<html lang="en">
+				<head>
+					<meta charset="UTF-8">
+					<meta name="viewport" content="width=device-width, initial-scale=1.0">
+					<title></title>
+				</head>
+				<body>${html}</body>
+			</html>`
+		}
+		
+		return this.addCssInHtml(mockup, css);
+	}
+
+	private isHeadInHtml(html: string) {
+		const $ = cheerio.load(html);
+
+		return $('head').length > 0;
+	}
+
+	private addCssInHtml(html: string, css: string) {
+		const $ = cheerio.load(html);
+
+		$('head').append(`<style>${css}</style>`);
+
+		return $.html();
 	}
 }
 function getNonce() {
