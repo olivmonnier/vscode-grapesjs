@@ -2,6 +2,7 @@ import "../../../node_modules/grapesjs/dist/css/grapes.min.css";
 import "../css/styles.css";
 
 import grapesjs from 'grapesjs';
+import editBlock from './plugins/editHtml';
 
 const vscode = acquireVsCodeApi();
 
@@ -14,6 +15,7 @@ const editor = grapesjs.init({
 	// Size of the editor
 	height: '100%',
 	width: 'auto',
+	plugins: [editBlock],
 	// Disable the storage manager for the moment
 	storageManager: { type: null },
 	// Avoid any default panel
