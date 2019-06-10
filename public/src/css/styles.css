@@ -23,6 +23,10 @@ body {
   height: 100%;
 }
 
+.gjs-pn-buttons {
+	width: 100%;
+}
+
 .editor-row {
   display: flex;
   justify-content: flex-start;
@@ -38,14 +42,19 @@ body {
 }
 
 .panel__right {
-  flex-basis: 250px;
-  position: relative;
+	flex-basis: 300px;
+	flex-direction: column;
+	position: relative;
+	display: flex;
 	overflow-y: auto;
 }
 
-.panel__switcher {
+.panel__switcher, .panel__basic-actions {
 	position: initial;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+	display: block;
+}
+
+.panel__content {
+	flex: 1;
+	overflow-y: auto;
 }

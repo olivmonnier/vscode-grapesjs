@@ -23,7 +23,7 @@ const editor = grapesjs.init({
 				id: 'layers',
 				el: '.panel__right',
 				resizable: {
-					maxDim: 550,
+					maxDim: 600,
 					minDim: 250,
 					tc: 0, // Top handler
 					cl: 1, // Left handler
@@ -58,11 +58,19 @@ const editor = grapesjs.init({
 						active: false,
 						command: 'show-traits',
 						togglable: false
-					},
+					}
+				]
+			},
+			{
+				id: 'basic-actions',
+				el: '.panel__basic-actions',
+				buttons: [
 					{
-						id: 'export-content',
+						id: 'export',
+						className: 'btn-open-export',
 						label: 'Export',
-						command: 'call-vscode-export'
+						command: 'call-vscode-export',
+      			context: 'export-template'
 					}
 				]
 			}
