@@ -2,7 +2,7 @@ import "../../../node_modules/grapesjs/dist/css/grapes.min.css";
 import "../css/styles.css";
 
 import grapesjs from 'grapesjs';
-import editBlock from './plugins/editHtml';
+import editBlock from './plugins/editBlock';
 
 const vscode = acquireVsCodeApi();
 

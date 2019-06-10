@@ -35,12 +35,16 @@ export default (editor, opts = {}) => {
       const { editor, options } = this;
       const title = options.title || modalTitle;
       const content = this.getContent();
-      const code = target.get(keyBlockCode) || '';
+
+      let htmlContent = document.createElement('div')
+      htmlContent.innerHTML = target.toHTML()
+      htmlContent = htmlContent.firstChild.innerHTML
+
       editor.Modal
         .open({ title, content })
         .getModel()
         .once('change:open', () => editor.stopCommand(this.id));
-      this.getCodeViewer().setContent(code);
+      this.getCodeViewer().setContent(htmlContent);
     },
 
     /**
