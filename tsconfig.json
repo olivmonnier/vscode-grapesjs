@@ -11,5 +11,5 @@
 		"skipLibCheck": true
 	},
 	"include": ["src"],
-	"exclude": ["src/ui", "node_modules", ".vscode-test"]
+	"exclude": ["src/ui"]
 }

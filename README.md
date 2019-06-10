@@ -15,8 +15,6 @@ Demonstrates VS Code's [webview API](https://code.visualstudio.com/api/extension
 
 ## Demo
 
-![demo](demo.gif)
-
 ## VS Code API
 
 ### `vscode` module
