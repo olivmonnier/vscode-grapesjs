@@ -5,11 +5,11 @@ import { join } from "path";
 export default class ContentProvider {
 	public getContent(context: ExtensionContext, content?: string | undefined) {
 		const vendorsPathOnDisk = Uri.file(
-			join(context.extensionPath, 'public', 'build', 'vendors.bundle.js')
+			join(context.extensionPath, 'out', 'ui', 'vendors.bundle.js')
 		);
 		const vendorsUri = vendorsPathOnDisk.with({ scheme: 'vscode-resource' });
 		const scriptPathOnDisk = Uri.file(
-			join(context.extensionPath, 'public', 'build', 'app.bundle.js')
+			join(context.extensionPath, 'out', 'ui', 'app.bundle.js')
 		);
 		const scriptUri = scriptPathOnDisk.with({ scheme: 'vscode-resource' });
 		const nonce = getNonce();

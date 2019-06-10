@@ -4,10 +4,10 @@ const path = require('path');
 
 module.exports = env => ({
 	entry: {
-		app: "./public/src/js/app.js"
+		app: "./src/ui/js/app.js"
 	},
 	output: {
-		path: path.resolve(__dirname, 'public/build'),
+		path: path.resolve(__dirname, 'out/ui'),
 		filename: '[name].bundle.js'
 	},
 	optimization: {

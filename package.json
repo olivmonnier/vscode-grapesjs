@@ -13,7 +13,7 @@
 		"*"
 	],
 	"preview": true,
-	"main": "./out/extension.js",
+	"main": "./out/extension/extension.js",
 	"contributes": {
 		"commands": [
 			{
@@ -33,11 +33,14 @@
 		}
 	},
 	"scripts": {
-		"vscode:prepublish": "npm run compile",
+		"vscode:prepublish": "npm run build",
 		"compile": "tsc  -p ./",
 		"lint": "tslint -p ./",
-		"watch": "tsc -w -p ./",
-		"build": "webpack --env.production --config ./webpack.config.js"
+		"watch": "tsc -watch -p ./src/extension --project ./tsconfig.json",
+		"build-app": "webpack --env.production --config ./webpack.config.js",
+		"build": "rimraf out && npm run compile && npm run build-app",
+		"package-ext": "vsce package",
+		"publish-ext": "vsce publish"
 	},
 	"dependencies": {},
 	"devDependencies": {
@@ -51,10 +54,13 @@
 		"clean-webpack-plugin": "^3.0.0",
 		"css-loader": "^2.1.1",
 		"grapesjs": "^0.14.62",
+		"rimraf": "^2.6.3",
 		"style-loader": "^0.23.1",
 		"tslint": "^5.16.0",
 		"typescript": "^3.4.5",
 		"url-loader": "^1.1.2",
+		"vsce": "^1.62.0",
+		"vscode": "^1.1.34",
 		"webpack": "^4.32.2",
 		"webpack-cli": "^3.3.2"
 	}
