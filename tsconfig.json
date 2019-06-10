@@ -10,5 +10,6 @@
 		"allowSyntheticDefaultImports": true,
 		"skipLibCheck": true
 	},
-	"exclude": ["node_modules", ".vscode-test"]
+	"include": ["src"],
+	"exclude": ["src/ui"]
 }
