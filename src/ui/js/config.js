@@ -65,8 +65,7 @@ export default {
 				buttons: [
 					{
 						id: 'export',
-						className: 'btn-open-export',
-						label: 'Export',
+						className: 'fa fa-window-restore btn-open-export',
 						command: 'call-vscode-export',
       			context: 'export-template'
 					}

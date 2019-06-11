@@ -73,3 +73,7 @@ body.loading:after {
 	flex: 1;
 	overflow-y: auto;
 }
+
+.panel__basic-actions .gjs-pn-buttons {
+	flex-direction: row-reverse;
+}
