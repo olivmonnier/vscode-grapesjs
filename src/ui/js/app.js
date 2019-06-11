@@ -180,6 +180,10 @@ window.addEventListener('message', event => {
 	switch (message.command) {
 		case 'change':
 			editor.setComponents(message.content);
+			document.body.classList.remove('loading');
+			return;
+		case 'loading':
+			document.body.classList.add('loading');
 			return;
 	}
 })

@@ -35,8 +35,9 @@ export default class GrapesEditorManager {
 
 	private onChangeTextDocument(event: vscode.TextDocumentChangeEvent) {
 		const { document } = event;
-		if (this._activeEditor && this.isAcceptableLaguage(document.languageId)) {
-			const content = this._activeEditor.document.getText();
+		
+		if (this.isAcceptableLaguage(document.languageId)) {
+			const content = document.getText();
 
 			this._panel.webview.postMessage({
 				command: 'change',
@@ -68,13 +69,22 @@ export default class GrapesEditorManager {
 			this._disposables
 		)
 
+		if (vscode.window.activeTextEditor) {
+			this._activeEditor = vscode.window.activeTextEditor;
+		}
+
 		vscode.window.onDidChangeActiveTextEditor(activeEditor => {
 			if (activeEditor && this.isAcceptableLaguage(activeEditor.document.languageId)) {
 				this._activeEditor = activeEditor
 			}
 		});
 
-		vscode.workspace.onDidChangeTextDocument(debounced(1500, this.onChangeTextDocument.bind(this)));
+		vscode.workspace.onDidChangeTextDocument(event => {
+			this._panel.webview.postMessage({
+				command: 'loading'
+			});
+			debounced(1500, this.onChangeTextDocument.bind(this))(event)
+		});
 	}
 
 	public dispose() {

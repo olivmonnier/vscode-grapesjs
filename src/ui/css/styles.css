@@ -8,6 +8,21 @@ body {
 	background-color: aliceblue;
 }
 
+body.loading {
+	overflow: hidden;
+}
+body.loading:after {
+	content: ' ';
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #000;
+	opacity: .7;
+	z-index: 1;
+}
+
 #root {
 	height: 100%;
 }
