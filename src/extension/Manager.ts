@@ -35,7 +35,7 @@ export default class GrapesEditorManager {
 
 	private onChangeTextDocument(event: vscode.TextDocumentChangeEvent) {
 		const { document } = event;
-		
+
 		if (this.isAcceptableLaguage(document.languageId)) {
 			const content = document.getText();
 
@@ -79,12 +79,13 @@ export default class GrapesEditorManager {
 			}
 		});
 
-		vscode.workspace.onDidChangeTextDocument(event => {
+		vscode.workspace.onDidChangeTextDocument(() => {
 			this._panel.webview.postMessage({
 				command: 'loading'
 			});
-			debounced(1500, this.onChangeTextDocument.bind(this))(event)
 		});
+
+		vscode.workspace.onDidChangeTextDocument(debounced(1500, this.onChangeTextDocument.bind(this)));
 	}
 
 	public dispose() {
