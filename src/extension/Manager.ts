@@ -73,7 +73,9 @@ export default class GrapesEditorManager {
 							language: "html",
 							content: contentProvider.exportMockup(html, css)
 						})
-						.then(doc => vscode.window.showTextDocument(doc))
+						.then(doc => vscode.window.showTextDocument(doc, {
+							preserveFocus: true
+						}))
 						return;
 				}
 			},
