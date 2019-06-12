@@ -7,6 +7,11 @@ export function activate(context: vscode.ExtensionContext) {
 			Manager.createOrShow(context)
 		})
 	);
+	context.subscriptions.push(
+		vscode.commands.registerCommand('grapes.test', () => {
+			console.log('test')
+		})
+	);
 
 	if (vscode.window.registerWebviewPanelSerializer) {
 		vscode.window.registerWebviewPanelSerializer(Manager.viewType, {

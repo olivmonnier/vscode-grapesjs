@@ -6,6 +6,7 @@ const contentProvider = new ContentProvider();
 
 export default class GrapesEditorManager {
 	public static currentPanel: GrapesEditorManager | undefined;
+	public static viewFocus = 'grapesViewFocus';
 	public static viewType = 'grapes.editor';
 	private readonly _panel: vscode.WebviewPanel;
 	private _activeEditor: vscode.TextEditor | undefined;
@@ -49,8 +50,11 @@ export default class GrapesEditorManager {
 	private constructor(panel: vscode.WebviewPanel, context: vscode.ExtensionContext) {
 		const activeContent = vscode.window.activeTextEditor ? vscode.window.activeTextEditor.document.getText() : '';
 		this._panel = panel;
-		this._panel.webview.html = contentProvider.getContent(context, activeContent);
 		this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
+		this._panel.onDidChangeViewState(({ webviewPanel }) => {
+			this.setWebviewActiveContext(webviewPanel.active);
+		});
+		this._panel.webview.html = contentProvider.getContent(context, activeContent);
 		this._panel.webview.onDidReceiveMessage(
 			message => {
 				switch(message.command) {
@@ -68,6 +72,8 @@ export default class GrapesEditorManager {
 			null,
 			this._disposables
 		)
+
+		this.setWebviewActiveContext(true);
 
 		if (vscode.window.activeTextEditor) {
 			this._activeEditor = vscode.window.activeTextEditor;
@@ -101,5 +107,9 @@ export default class GrapesEditorManager {
 
 	public isAcceptableLaguage(languageId: string) {
 		return (languageId === 'html' || languageId === 'plaintext')
+	}
+
+	public setWebviewActiveContext(value: boolean) {
+    vscode.commands.executeCommand('setContext', GrapesEditorManager.viewFocus, value);
 	}
 }
