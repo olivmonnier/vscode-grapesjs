@@ -10,6 +10,9 @@ window.addEventListener('message', event => {
 	const message = event.data;
 
 	switch (message.command) {
+		case 'callExport':
+			editor.runCommand('call-vscode-export');
+			return;
 		case 'change':
 			editor.setComponents(message.content);
 			document.body.classList.remove('loading');

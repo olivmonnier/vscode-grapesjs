@@ -21,8 +21,8 @@
 				"title": "Toggle Grapes panel"
 			},
 			{
-				"command": "grapes.test",
-				"title": "Grapes Test"
+				"command": "grapes.export",
+				"title": "Export in HTML/CSS"
 			}
 		],
 		"menus": {
@@ -35,7 +35,7 @@
 				},
 				{
 					"when": "grapesViewFocus",
-					"command": "grapes.test",
+					"command": "grapes.export",
 					"group": "navigation"
 				}
 			]

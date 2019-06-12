@@ -30,6 +30,14 @@ export default class GrapesEditorManager {
 		}
 	}
 
+	public static exportContent() {
+		if (GrapesEditorManager.currentPanel) {
+			GrapesEditorManager.currentPanel._panel.webview.postMessage({
+				command: 'callExport'
+			})
+		}
+	}
+
 	public static revive(panel: vscode.WebviewPanel, context: vscode.ExtensionContext) {
 		GrapesEditorManager.currentPanel = new GrapesEditorManager(panel, context);
 	}

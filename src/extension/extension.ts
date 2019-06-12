@@ -8,8 +8,8 @@ export function activate(context: vscode.ExtensionContext) {
 		})
 	);
 	context.subscriptions.push(
-		vscode.commands.registerCommand('grapes.test', () => {
-			console.log('test')
+		vscode.commands.registerCommand('grapes.export', () => {
+			Manager.exportContent()
 		})
 	);
 

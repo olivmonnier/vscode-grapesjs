@@ -62,14 +62,7 @@ export default {
 			{
 				id: 'basic-actions',
 				el: '.panel__basic-actions',
-				buttons: [
-					{
-						id: 'export',
-						className: 'fa fa-window-restore btn-open-export',
-						command: 'call-vscode-export',
-      			context: 'export-template'
-					}
-				]
+				buttons: []
 			}
 		]
 	},
