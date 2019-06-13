@@ -1,7 +1,7 @@
 {
 	"name": "grapes",
 	"description": "",
-	"version": "0.0.1",
+	"version": "0.0.3",
 	"publisher": "olivmonnier",
 	"engines": {
 		"vscode": "^1.33.0"
