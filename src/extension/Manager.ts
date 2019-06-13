@@ -43,9 +43,9 @@ export default class GrapesEditorManager {
 	}
 
 	private onChangeTextDocument(event: vscode.TextDocumentChangeEvent) {
-		const { document } = event;
+		const { document, contentChanges } = event;
 
-		if (this.isAcceptableLaguage(document.languageId)) {
+		if (this._activeEditor && this.isAcceptableLaguage(document.languageId) && contentChanges.length > 0) {
 			const content = document.getText();
 
 			this._panel.webview.postMessage({
@@ -89,16 +89,14 @@ export default class GrapesEditorManager {
 			this._activeEditor = vscode.window.activeTextEditor;
 		}
 
-		vscode.window.onDidChangeActiveTextEditor(activeEditor => {
-			if (activeEditor && this.isAcceptableLaguage(activeEditor.document.languageId)) {
-				this._activeEditor = activeEditor
+		vscode.workspace.onDidChangeTextDocument((event: vscode.TextDocumentChangeEvent) => {
+			const { document, contentChanges } = event;
+			
+			if (this._activeEditor && this.isAcceptableLaguage(document.languageId) && contentChanges.length > 0) {
+				this._panel.webview.postMessage({
+					command: 'loading'
+				});
 			}
-		});
-
-		vscode.workspace.onDidChangeTextDocument(() => {
-			this._panel.webview.postMessage({
-				command: 'loading'
-			});
 		});
 
 		vscode.workspace.onDidChangeTextDocument(debounced(1500, this.onChangeTextDocument.bind(this)));
@@ -116,7 +114,7 @@ export default class GrapesEditorManager {
 	}
 
 	public isAcceptableLaguage(languageId: string) {
-		return (languageId === 'html' || languageId === 'plaintext')
+		return (languageId === 'html')
 	}
 
 	public setWebviewActiveContext(value: boolean) {
