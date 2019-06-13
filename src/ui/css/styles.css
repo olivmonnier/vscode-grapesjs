@@ -1,3 +1,7 @@
+:root {
+	--bg-panel-header: rgba(128, 128, 128, 0.2);
+	--bg-panel: rgb(37, 37, 38);
+}
 html, body {
 	margin: 0;
 	padding: 0;
@@ -42,6 +46,14 @@ body.loading:after {
 	width: 100%;
 }
 
+.gjs-one-bg {
+	background-color: var(--bg-panel);
+}
+
+.gjs-pn-panel, .gjs-layer {
+	background-color: var(--bg-panel-header);
+}
+
 .editor-row {
   display: flex;
   justify-content: flex-start;
@@ -60,8 +72,10 @@ body.loading:after {
 	flex-basis: 300px;
 	flex-direction: column;
 	position: relative;
+	padding-top: 0;
 	display: flex;
 	overflow-y: auto;
+	background-color: var(--bg-panel);
 }
 
 .panel__switcher, .panel__basic-actions {
@@ -74,6 +88,9 @@ body.loading:after {
 	overflow-y: auto;
 }
 
+.panel__basic-actions:empty {
+	display: none;
+}
 .panel__basic-actions .gjs-pn-buttons {
 	flex-direction: row-reverse;
 }

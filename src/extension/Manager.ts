@@ -14,7 +14,17 @@ export default class GrapesEditorManager {
 
 	public static createOrShow(context: vscode.ExtensionContext) {
 		if (GrapesEditorManager.currentPanel) {
-			GrapesEditorManager.currentPanel._panel.reveal(vscode.ViewColumn.Two)
+			const activeContent = vscode.window.activeTextEditor ? vscode.window.activeTextEditor.document.getText() : '';
+			const { _panel } = GrapesEditorManager.currentPanel;
+			
+			_panel.reveal(vscode.ViewColumn.Two);
+			_panel.webview.postMessage({
+				command: 'loading'
+			});
+			_panel.webview.postMessage({
+				command: 'change',
+				content: activeContent
+			});
 		} else {
 			const panel = vscode.window.createWebviewPanel(
 				GrapesEditorManager.viewType,
