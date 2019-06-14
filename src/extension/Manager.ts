@@ -69,6 +69,7 @@ export default class GrapesEditorManager {
 	}
 
 	private constructor(panel: vscode.WebviewPanel, context: vscode.ExtensionContext) {
+		const delay: number = vscode.workspace.getConfiguration().get('grapes.delay') || 0;
 		const activeContent = vscode.window.activeTextEditor ? vscode.window.activeTextEditor.document.getText() : '';
 		this._panel = panel;
 		this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
@@ -112,7 +113,7 @@ export default class GrapesEditorManager {
 			}
 		});
 
-		vscode.workspace.onDidChangeTextDocument(debounced(1500, this.onChangeTextDocument.bind(this)));
+		vscode.workspace.onDidChangeTextDocument(debounced(delay, this.onChangeTextDocument.bind(this)));
 	}
 
 	public dispose() {

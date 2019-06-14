@@ -15,6 +15,17 @@
 	"preview": true,
 	"main": "./out/extension/extension.js",
 	"contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "Grapes configuration",
+			"properties": {
+				"grapes.delay": {
+					"type":"number",
+					"default":1500,
+					"description": "Delay to wait before render after a document change."
+				}
+			}
+		},
 		"commands": [
 			{
 				"command": "grapes.showPanel",
