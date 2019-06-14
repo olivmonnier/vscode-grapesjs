@@ -7,13 +7,13 @@ export default (editor, opts = {}) => {
     // Pass a falsy value to avoid adding the button
     toolbarBtnCustomCode: {},
 
-    modalTitle: 'Insert your code',
+    modalTitle: 'Edit this block',
 
     // Additional options for the code viewer, eg. `{ theme: 'hopscotch', readOnly: 0 }`
     codeViewOptions: {},
 
     // Label for the default save button
-    buttonLabel: 'Save',
+    buttonLabel: 'Modify',
 
     placeholderScript: `<div style="pointer-events: none; padding: 10px;">
       <svg viewBox="0 0 24 24" style="height: 30px; vertical-align: middle;">

@@ -83,7 +83,7 @@ export default {
 			{
 				name: 'Layout',
 				open: false,
-				buildProps: ['width', 'height', 'max-width', 'min-height', 'margin', 'padding'],
+				buildProps: ['width', 'height', 'max-width', 'max-height', 'min-width', 'min-height', 'margin', 'padding'],
 			},
 			{
 				name: 'Typography',
