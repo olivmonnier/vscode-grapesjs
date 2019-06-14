@@ -21,10 +21,13 @@ export default class GrapesEditorManager {
 			_panel.webview.postMessage({
 				command: 'loading'
 			});
-			_panel.webview.postMessage({
-				command: 'change',
-				content: activeContent
-			});
+
+			setTimeout(() => {
+				_panel.webview.postMessage({
+					command: 'change',
+					content: activeContent
+				});
+			}, 300);
 		} else {
 			const panel = vscode.window.createWebviewPanel(
 				GrapesEditorManager.viewType,

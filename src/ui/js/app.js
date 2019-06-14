@@ -6,6 +6,10 @@ import config from './config';
 
 const editor = grapesjs.init(config);
 
+editor.on('update', function() {
+	document.body.classList.remove('loading');
+});
+
 window.addEventListener('message', event => {
 	const message = event.data;
 
@@ -15,10 +19,9 @@ window.addEventListener('message', event => {
 			return;
 		case 'change':
 			editor.setComponents(message.content);
-			document.body.classList.remove('loading');
 			return;
 		case 'loading':
 			document.body.classList.add('loading');
 			return;
 	}
-})
+});

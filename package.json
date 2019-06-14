@@ -1,10 +1,10 @@
 {
 	"name": "grapes",
 	"description": "",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"publisher": "olivmonnier",
 	"engines": {
-		"vscode": "^1.33.0"
+		"vscode": "^1.35.0"
 	},
 	"categories": [
 		"Other"
@@ -58,20 +58,20 @@
 		"@babel/core": "^7.4.5",
 		"@babel/preset-env": "^7.4.5",
 		"@types/cheerio": "^0.22.11",
-		"@types/node": "^10.5.2",
-		"@types/vscode": "^1.32.0",
+		"@types/node": "^10.14.9",
+		"@types/vscode": "^1.35.0",
 		"babel-loader": "^8.0.6",
 		"clean-webpack-plugin": "^3.0.0",
 		"css-loader": "^2.1.1",
 		"grapesjs": "^0.14.62",
 		"rimraf": "^2.6.3",
 		"style-loader": "^0.23.1",
-		"tslint": "^5.16.0",
-		"typescript": "^3.4.5",
+		"tslint": "^5.17.0",
+		"typescript": "^3.5.2",
 		"url-loader": "^1.1.2",
-		"vsce": "^1.62.0",
+		"vsce": "^1.63.0",
 		"vscode": "^1.1.34",
-		"webpack": "^4.32.2",
-		"webpack-cli": "^3.3.2"
+		"webpack": "^4.34.0",
+		"webpack-cli": "^3.3.4"
 	}
 }
