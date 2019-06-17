@@ -56,6 +56,13 @@ export default {
 						active: false,
 						command: 'show-traits',
 						togglable: false
+					},
+					{
+						id: 'show-blocks',
+						className: 'fa fa-th-large',
+						active: false,
+						command: 'show-blocks',
+						togglable: false
 					}
 				]
 			},
@@ -114,6 +121,9 @@ export default {
 	traitManager: {
 		appendTo: '.traits-container',
 	},
+	blockManager: {
+		appendTo: '.blocks-container'
+	},
 	commands: {
 		defaults: [
 			{
@@ -146,6 +156,17 @@ export default {
 				},
 				stop(editor) {
 					const trEl = editor.getContainer().closest('.editor-row').querySelector('.traits-container');
+					trEl.style.display = 'none';
+				}
+			},
+			{
+				id: 'show-blocks',
+				run(editor) {
+					const trEl = editor.getContainer().closest('.editor-row').querySelector('.blocks-container');
+					trEl.style.display = '';
+				},
+				stop(editor) {
+					const trEl = editor.getContainer().closest('.editor-row').querySelector('.blocks-container');
 					trEl.style.display = 'none';
 				}
 			},

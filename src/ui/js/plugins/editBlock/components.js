@@ -1,4 +1,4 @@
-import { keyBlockCode, commandName } from './config';
+import { keyBlockCode, typeBlockCode, commandName } from './config';
 
 export default (editor, opts = {}) => {
   let timedInterval;
@@ -63,5 +63,9 @@ export default (editor, opts = {}) => {
         this.em.get('Commands').run(commandName, { target });
       },
     }
+  })
+
+  comps.addType(typeBlockCode, {
+    extend: 'default'
   })
 }

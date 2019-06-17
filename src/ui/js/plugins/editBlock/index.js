@@ -1,8 +1,16 @@
 import loadComponents from './components';
+import loadBlocks from './blocks';
 import loadCommands from './commands';
 
 export default (editor, opts = {}) => {
   const options = { ...{
+    // Label of the custom code block
+    blockLabel: 'Custom Code',
+
+    // Object to extend the default custom code block, eg. { label: 'Custom Code', category: 'Extra', ... }.
+    // Pass a falsy value to avoid adding the block
+    blockCustomCode: {},
+
     // Object to extend the default component's toolbar button for the code, eg. `{ label: '</>', attributes: { title: 'Open custom code' } }`
     // Pass a falsy value to avoid adding the button
     toolbarBtnCustomCode: {},
@@ -24,6 +32,8 @@ export default (editor, opts = {}) => {
   }, ...opts };
 
   loadComponents(editor, options);
+
+  loadBlocks(editor, options);
 
   loadCommands(editor, options);
 }

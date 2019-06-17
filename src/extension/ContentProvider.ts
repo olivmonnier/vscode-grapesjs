@@ -44,6 +44,7 @@ export default class ContentProvider {
 											<div class="layers-container"></div>
 											<div class="styles-container" style="display: none;"></div>
 											<div class="traits-container" style="display: none;"></div>
+											<div class="blocks-container" style="display: none;"></div>
 										</div>
 										<div class="panel__basic-actions"></div>
 									</div>
