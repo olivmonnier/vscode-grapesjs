@@ -1,3 +1,4 @@
+import grapesjs from 'grapesjs';
 import editBlock from './plugins/editBlock';
 
 const vscode = acquireVsCodeApi();
@@ -11,7 +12,8 @@ export default {
 	// Size of the editor
 	height: '100%',
 	width: 'auto',
-	plugins: [].concat(window.plugins, [editBlock]),
+	plugins: initPlugins(window.plugins),
+	pluginsOpts: initPluginsOptions(window.plugins),
 	// Disable the storage manager for the moment
 	storageManager: { type: null },
 	// Avoid any default panel
@@ -181,4 +183,20 @@ export default {
 			}
 		]
 	}
+}
+
+function initPlugins(plugins) {
+	plugins.map(plugin => grapesjs.plugins.add(plugin.name, eval(plugin.content)));
+
+	return [].concat(
+		plugins.map(plugin => plugin.name),
+		[editBlock]
+	)
+}
+
+function initPluginsOptions(plugins) {
+	return plugins.reduce((acc, curr) => {
+		acc[curr.name] = curr.options;
+		return acc
+	}, {})
 }

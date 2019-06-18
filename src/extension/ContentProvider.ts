@@ -32,7 +32,7 @@ export default class ContentProvider {
 							<title>GrapesJS</title>
 							<script nonce="${nonce}" src="${vendorsUri}"></script>
 							<script nonce="${nonce}">
-								window.plugins = ${plugins}
+								window.plugins = ${JSON.stringify(plugins)}
 							</script>
 						</head>
 						<body>
@@ -124,19 +124,25 @@ export default class ContentProvider {
 				const contentConfig = fs.readFileSync(join(srcPath, 'package.json')).toString('utf8')
 				const jsonConfig = JSON.parse(contentConfig)
 
-				return getNestedObject(jsonConfig, ['vscode', 'grapesjs']);
+				return Object.assign(getNestedObject(jsonConfig, ['vscode', 'grapesjs']), {
+					name: jsonConfig.name || ''
+				});
 			} catch(err) {
 				vscode.window.showErrorMessage(err.message || err)
 			}
 		}
 	}
 
-	private _loadPlugin(srcPath: string, config: { lib: string }) {
-		const { lib } = config;
+	private _loadPlugin(srcPath: string, config: { lib: string, name: string, options?: any }) {
+		const { lib, name, options } = config;
 		const path = join(srcPath, lib);
 
 		if (fs.existsSync(path)) {
-			return fs.readFileSync(path, 'utf8');
+			return { 
+				content: fs.readFileSync(path, 'utf8'), 
+				options: options || {}, 
+				name 
+			}
 		}
 	}
 }
