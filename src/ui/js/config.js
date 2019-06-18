@@ -11,7 +11,7 @@ export default {
 	// Size of the editor
 	height: '100%',
 	width: 'auto',
-	plugins: [editBlock].concat(window.plugins),
+	plugins: [].concat(window.plugins, [editBlock]),
 	// Disable the storage manager for the moment
 	storageManager: { type: null },
 	// Avoid any default panel
