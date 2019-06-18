@@ -69,7 +69,8 @@ export default class GrapesEditorManager {
 	}
 
 	private constructor(panel: vscode.WebviewPanel, context: vscode.ExtensionContext) {
-		const delay: number = vscode.workspace.getConfiguration().get('grapes.delay') || 0;
+		const config: vscode.WorkspaceConfiguration = vscode.workspace.getConfiguration();
+		const delay: number = config.get('grapes.delay') || 0;
 		const activeContent = vscode.window.activeTextEditor ? vscode.window.activeTextEditor.document.getText() : '';
 		this._panel = panel;
 		this._panel.onDidDispose(() => this.dispose(), null, this._disposables);

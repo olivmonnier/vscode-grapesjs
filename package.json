@@ -1,7 +1,7 @@
 {
 	"name": "grapes",
 	"description": "",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"publisher": "olivmonnier",
 	"engines": {
 		"vscode": "^1.35.0"
@@ -23,6 +23,11 @@
 					"type":"number",
 					"default":1500,
 					"description": "Delay to wait before render after a document change."
+				},
+				"grapes.pluginsFolder": {
+					"type": "string",
+					"default": "./",
+					"description": "Path to your Grapes plugins folder"
 				}
 			}
 		},
