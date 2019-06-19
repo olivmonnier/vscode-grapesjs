@@ -6,21 +6,17 @@ import { getNonce } from './utils';
 
 export default class ContentProvider {
 	public static getContent(context: ExtensionContext, content?: string | undefined) {
-		const plugins = PluginsManager.getAll() || [];
-		const pluginsFiles = plugins.map(plugin => {
-			if (plugin) {
-				const path = Uri.file(plugin.path)
-				return path.with({ scheme: 'vscode-resource' })
-			}
-		}).filter(Boolean);
-		const vendorsPathOnDisk = Uri.file(
-			join(context.extensionPath, 'out', 'ui', 'vendors.bundle.js')
-		);
-		const vendorsUri = vendorsPathOnDisk.with({ scheme: 'vscode-resource' });
-		const scriptPathOnDisk = Uri.file(
-			join(context.extensionPath, 'out', 'ui', 'app.bundle.js')
-		);
-		const scriptUri = scriptPathOnDisk.with({ scheme: 'vscode-resource' });
+		const plugins = PluginsManager.getAll();
+		const pluginsFiles = plugins.map(({ path }) => {
+			return Uri.file(path || '').with({ scheme: 'vscode-resource' });
+		});
+		const vendorsUri = Uri.file(
+			join(context.extensionPath, '/out/ui/vendors.bundle.js')
+		).with({ scheme: 'vscode-resource' });
+		const scriptUri = Uri.file(
+			join(context.extensionPath, '/out/ui/app.bundle.js')
+		).with({ scheme: 'vscode-resource' });
+
 		const nonce = getNonce();
 	
 		return `<!DOCTYPE html>

@@ -5,22 +5,20 @@ import { getNestedObject } from './utils';
 
 export default class PluginsManager {
   public static getAll() {
-    if (vscode.workspace.workspaceFolders) {
-			const pluginsFolderPath: string = vscode.workspace.getConfiguration().get('grapesjs.pluginsFolder') || './';
-			const workspaceFolderPath = vscode.workspace.workspaceFolders[0].uri.fsPath
+		if (!vscode.workspace.workspaceFolders) return [];
 
-			if (workspaceFolderPath) {
-				const srcPath = join(workspaceFolderPath, pluginsFolderPath)
-				const pluginsFolders = this._getDirectories(srcPath)
-				const pluginsConfig = pluginsFolders.map(folder => this._getConfig(join(srcPath, folder)))
-				
-				return pluginsConfig.map((config, i) => {
-					if (config) {
-						return this._loadPlugin(join(srcPath, pluginsFolders[i]), config)
-					}
-				}).filter(Boolean)
-			} 
-		}
+		const pluginsFolderPath: string = vscode.workspace.getConfiguration().get('grapesjs.pluginsFolder') || './';
+		const workspaceFolderPath = vscode.workspace.workspaceFolders[0].uri.fsPath
+
+		const srcPath = join(workspaceFolderPath, pluginsFolderPath)
+		const pluginsFolders = this._getDirectories(srcPath)
+		const pluginsConfig = pluginsFolders.map(folder => 
+			this._getConfig(join(srcPath, folder))
+		).filter(Boolean)
+
+		return pluginsConfig.map((config, i) => 
+			this._loadPlugin(join(srcPath, pluginsFolders[i]), config)
+		)
   }
 
   private static _getDirectories(srcPath: string) {
@@ -42,16 +40,12 @@ export default class PluginsManager {
 		}
 	}
 
-	private static _loadPlugin(srcPath: string, config: { lib: string, name: string, options?: any }) {
+	private static _loadPlugin(srcPath: string, config: { lib: string; name: string; options?: any }) {
 		const { lib, name, options } = config;
 		const path = join(srcPath, lib);
 
-		if (fs.existsSync(path)) {
-			return { 
-				options: options || {}, 
-				path,
-				name 
-			}
-		}
+		return fs.existsSync(path) 
+			? { options: options || {}, path, name }
+			: {}
 	}
 }
