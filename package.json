@@ -17,27 +17,27 @@
 	"contributes": {
 		"configuration": {
 			"type": "object",
-			"title": "Grapes configuration",
+			"title": "Grapesjs panel configuration",
 			"properties": {
-				"grapes.delay": {
+				"grapesjs.delay": {
 					"type":"number",
 					"default":1500,
 					"description": "Delay to wait before render after a document change."
 				},
-				"grapes.pluginsFolder": {
+				"grapesjs.pluginsFolder": {
 					"type": "string",
 					"default": "./",
-					"description": "Path to your Grapes plugins folder"
+					"description": "Path to your Grapesjs plugins folder"
 				}
 			}
 		},
 		"commands": [
 			{
-				"command": "grapes.showPanel",
-				"title": "Toggle Grapes panel"
+				"command": "grapesjs.showPanel",
+				"title": "Toggle Grapesjs panel"
 			},
 			{
-				"command": "grapes.export",
+				"command": "grapesjs.export",
 				"title": "Export in HTML/CSS"
 			}
 		],
@@ -45,13 +45,13 @@
 			"editor/title": [
 				{
 					"when": "resourceLangId == html",
-					"command": "grapes.showPanel",
-					"alt": "grapes.showPanel",
+					"command": "grapesjs.showPanel",
+					"alt": "grapesjs.showPanel",
 					"group": "navigation"
 				},
 				{
-					"when": "grapesViewFocus",
-					"command": "grapes.export",
+					"when": "grapesjsViewFocus",
+					"command": "grapesjs.export",
 					"group": "navigation"
 				}
 			]

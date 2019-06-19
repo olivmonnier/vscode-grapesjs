@@ -6,7 +6,7 @@ import { getNestedObject } from './utils';
 export default class PluginsManager {
   public static getAll() {
     if (vscode.workspace.workspaceFolders) {
-			const pluginsFolderPath: string = vscode.workspace.getConfiguration().get('grapes.pluginsFolder') || './';
+			const pluginsFolderPath: string = vscode.workspace.getConfiguration().get('grapesjs.pluginsFolder') || './';
 			const workspaceFolderPath = vscode.workspace.workspaceFolders[0].uri.fsPath
 
 			if (workspaceFolderPath) {

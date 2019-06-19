@@ -6,8 +6,8 @@ let timerId: NodeJS.Timeout;
 
 export default class GrapesEditorManager {
 	public static currentPanel: GrapesEditorManager | undefined;
-	public static viewFocus = 'grapesViewFocus';
-	public static viewType = 'grapes.editor';
+	public static viewFocus = 'grapesjsViewFocus';
+	public static viewType = 'grapesjs.editor';
 	private readonly _panel: vscode.WebviewPanel;
 	private _activeEditor: vscode.TextEditor | undefined;
 	private _disposables: vscode.Disposable[] = [];
@@ -34,7 +34,7 @@ export default class GrapesEditorManager {
 		} else {
 			const panel = vscode.window.createWebviewPanel(
 				GrapesEditorManager.viewType,
-				'Grapes Editor',
+				'Grapesjs Editor',
 				vscode.ViewColumn.Two,
 				{
 					enableScripts: true,
@@ -77,7 +77,7 @@ export default class GrapesEditorManager {
 
 	private constructor(panel: vscode.WebviewPanel, context: vscode.ExtensionContext) {
 		const config: vscode.WorkspaceConfiguration = vscode.workspace.getConfiguration();
-		const delay: number = config.get('grapes.delay') || 0;
+		const delay: number = config.get('grapesjs.delay') || 0;
 		const activeEditor = vscode.window.activeTextEditor;
 		const activeContent = (activeEditor && GrapesEditorManager.isAcceptableLaguage(activeEditor.document.languageId)) ? activeEditor.document.getText() : '';
 		this._panel = panel;

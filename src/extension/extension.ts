@@ -3,12 +3,12 @@ import Manager from './Manager';
 
 export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
-		vscode.commands.registerCommand('grapes.showPanel', () => {
+		vscode.commands.registerCommand('grapesjs.showPanel', () => {
 			Manager.createOrShow(context)
 		})
 	);
 	context.subscriptions.push(
-		vscode.commands.registerCommand('grapes.export', () => {
+		vscode.commands.registerCommand('grapesjs.export', () => {
 			Manager.exportContent()
 		})
 	);
