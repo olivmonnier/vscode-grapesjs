@@ -48,8 +48,8 @@ export default class PluginsManager {
 
 		if (fs.existsSync(path)) {
 			return { 
-				content: fs.readFileSync(path, 'utf8'), 
 				options: options || {}, 
+				path,
 				name 
 			}
 		}

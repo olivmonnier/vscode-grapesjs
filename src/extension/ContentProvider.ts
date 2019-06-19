@@ -2,10 +2,17 @@ import { Uri, ExtensionContext } from 'vscode';
 import * as cheerio from 'cheerio';
 import { join } from "path";
 import PluginsManager from './PluginsManager';
+import { getNonce } from './utils';
 
 export default class ContentProvider {
 	public static getContent(context: ExtensionContext, content?: string | undefined) {
-		const plugins = PluginsManager.getAll();
+		const plugins = PluginsManager.getAll() || [];
+		const pluginsFiles = plugins.map(plugin => {
+			if (plugin) {
+				const path = Uri.file(plugin.path)
+				return path.with({ scheme: 'vscode-resource' })
+			}
+		}).filter(Boolean);
 		const vendorsPathOnDisk = Uri.file(
 			join(context.extensionPath, 'out', 'ui', 'vendors.bundle.js')
 		);
@@ -30,13 +37,14 @@ export default class ContentProvider {
 							<meta name="viewport" content="width=device-width, initial-scale=1.0">
 							<title>GrapesJS</title>
 							<script nonce="${nonce}" src="${vendorsUri}"></script>
+							${pluginsFiles.map(plugin => `<script nonce="${nonce}" src="${plugin ? plugin : ''}"></script>`).join('')}
 							<script nonce="${nonce}">
-								window.plugins = ${JSON.stringify(plugins)}
+								window.plugins = ${JSON.stringify(plugins.map(plugin => plugin ? plugin.name : ''))}
+								window.pluginsOptions = ${JSON.stringify(plugins.map(plugin => plugin ? { options: plugin.options, name: plugin.name } : {}))}
 							</script>
 						</head>
 						<body>
-							<div id="root">
-								
+							<div id="root">								
 								<div class="editor-row">
 									<div class="editor-canvas">
 										<div id="gjs">
@@ -93,13 +101,4 @@ export default class ContentProvider {
 
 		return $.html();
 	}
-}
-
-function getNonce() {
-	let text = '';
-	const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-	for (let i = 0; i < 32; i++) {
-		text += possible.charAt(Math.floor(Math.random() * possible.length));
-	}
-	return text;
 }
