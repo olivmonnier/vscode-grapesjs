@@ -10,3 +10,8 @@ export function debounced(delay: number, fn: Function) {
 		}, delay)
 	}
 }
+
+export function getNestedObject(nestedObj: any, pathArr: Array<string>) {
+	return pathArr.reduce((obj, key) =>
+			(obj && obj[key] !== 'undefined') ? obj[key] : undefined, nestedObj);
+}

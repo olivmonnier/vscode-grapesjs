@@ -2,8 +2,6 @@ import * as vscode from "vscode";
 import ContentProvider from './ContentProvider';
 import { debounced } from './utils';
 
-const contentProvider = new ContentProvider();
-
 export default class GrapesEditorManager {
 	public static currentPanel: GrapesEditorManager | undefined;
 	public static viewFocus = 'grapesViewFocus';
@@ -77,7 +75,7 @@ export default class GrapesEditorManager {
 		this._panel.onDidChangeViewState(({ webviewPanel }) => {
 			this.setWebviewActiveContext(webviewPanel.active);
 		});
-		this._panel.webview.html = contentProvider.getContent(context, activeContent);
+		this._panel.webview.html = ContentProvider.getContent(context, activeContent);
 		this._panel.webview.onDidReceiveMessage(
 			message => {
 				switch(message.command) {
@@ -86,7 +84,7 @@ export default class GrapesEditorManager {
 
 						vscode.workspace.openTextDocument({
 							language: "html",
-							content: contentProvider.exportMockup(html, css)
+							content: ContentProvider.exportMockup(html, css)
 						})
 						.then(doc => vscode.window.showTextDocument(doc, {
 							preserveFocus: true
