@@ -14,11 +14,11 @@ export default class PluginsManager {
 		const pluginsFolders = this._getDirectories(srcPath)
 		const pluginsConfig = pluginsFolders.map(folder => 
 			this._getConfig(join(srcPath, folder))
-		).filter(Boolean)
-
-		return pluginsConfig.map((config, i) => 
-			this._loadPlugin(join(srcPath, pluginsFolders[i]), config)
 		)
+
+		return pluginsConfig.map((config, i) => {
+			return config ? this._loadPlugin(join(srcPath, pluginsFolders[i]), config) : {}
+		})
   }
 
   private static _getDirectories(srcPath: string) {
@@ -32,7 +32,8 @@ export default class PluginsManager {
 				const jsonConfig = JSON.parse(contentConfig)
 
 				return Object.assign(getNestedObject(jsonConfig, ['vscode', 'grapesjs']), {
-					name: jsonConfig.name || ''
+					name: jsonConfig.name || '',
+					main: jsonConfig.main || ''
 				});
 			} catch(err) {
 				vscode.window.showErrorMessage(err.message || err)
@@ -40,9 +41,9 @@ export default class PluginsManager {
 		}
 	}
 
-	private static _loadPlugin(srcPath: string, config: { lib: string; name: string; options?: any }) {
-		const { lib, name, options } = config;
-		const path = join(srcPath, lib);
+	private static _loadPlugin(srcPath: string, config: { lib: string; name: string; main: string; options?: any }) {
+		const { lib, name, main, options } = config;
+		const path = join(srcPath, lib || main);
 
 		return fs.existsSync(path) 
 			? { options: options || {}, path, name }
