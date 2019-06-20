@@ -18,7 +18,7 @@ export default class PluginsManager {
 
 		return pluginsConfig.map((config, i) => {
 			return config ? this._loadPlugin(join(srcPath, pluginsFolders[i]), config) : {}
-		})
+		}).filter(this._validPlugin)
   }
 
   private static _getDirectories(srcPath: string) {
@@ -48,5 +48,9 @@ export default class PluginsManager {
 		return fs.existsSync(path) 
 			? { options: options || {}, path, name }
 			: {}
+	}
+
+	private static _validPlugin(plugin: any) {
+		return plugin !== {} && plugin.hasOwnProperty('path') && plugin.hasOwnProperty('name')
 	}
 }
