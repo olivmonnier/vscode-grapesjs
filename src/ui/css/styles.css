@@ -54,6 +54,11 @@ body.loading:after {
 	background-color: var(--bg-panel-header);
 }
 
+.gjs-sm-label {
+	color: #ffca6f;
+  fill: #ffca6f;
+}
+
 .editor-row {
   display: flex;
   justify-content: flex-start;
