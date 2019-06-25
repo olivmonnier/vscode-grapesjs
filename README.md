@@ -15,7 +15,7 @@
 ## How to add plugins grapesjs
 
 - Clone this repository `git clone https://github.com/artf/grapesjs-plugin-boilerplate.git YOUR-PLUGIN-NAME` in your plugins folder (`./` by default)
-- Declare your plugin for use in it and add your config in `package.json`:
+- In `package.json` declare your plugin and add your config:
 
 ```json5
 {
