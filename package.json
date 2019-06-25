@@ -3,6 +3,15 @@
 	"description": "",
 	"version": "0.0.8",
 	"publisher": "olivmonnier",
+	"author": "olivmonnier",
+	"license": "MIT",
+	"repository": {
+    "type": "git",
+    "url": "git+https://github.com/olivmonnier/vscode-grapesjs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/olivmonnier/vscode-grapesjs/issues"
+  },
 	"engines": {
 		"vscode": "^1.35.0"
 	},
