@@ -12,7 +12,7 @@
 | `grapesjs.delay` | 1500 | Delay to wait before render after a document change. |
 | `grapesjs.pluginsFolder` | "./" | Path to your Grapesjs plugins folder. |
 
-## How to add plugins grapesjs
+## How to add grapesjs plugins
 
 - Clone this repository `git clone https://github.com/artf/grapesjs-plugin-boilerplate.git YOUR-PLUGIN-NAME` in your plugins folder (`./` by default)
 - In `package.json` declare your plugin and add your config:
