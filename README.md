@@ -35,10 +35,10 @@
 {
   ...
   "vscode": {
-    "grapesjs": { // or just true if there is no config
+    "grapesjs": { // or just true if there's no configuration
       "lib": "./index.js", // (optional) use main property if it's the same path
       "options": { 
-        ... // (optional) config to use in your plugin
+        ... // (optional) options to use in your plugin
       }
     }
   }
