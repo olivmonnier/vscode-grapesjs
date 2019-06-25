@@ -22,7 +22,7 @@
   ...
   "vscode": {
     "grapesjs": { // or just true if there is no config
-      "lib": "./index.js", // (optional) use main property if it's the same 
+      "lib": "./index.js", // (optional) use main property if it's the same path
       "options": { 
         ... // (optional) config to use in your plugin
       }
