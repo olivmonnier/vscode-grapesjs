@@ -4,7 +4,7 @@ const vscode = acquireVsCodeApi();
 
 export default {
   // Indicate where to init the editor. You can also pass an HTMLElement
-	container: '#gjs',
+  container: '#gjs',
 	// Get the content for the canvas directly from the element
 	// As an alternative we could use: `components: '<h1>Hello World Component!</h1>'`,
 	fromElement: true,
@@ -207,7 +207,7 @@ export default {
 					],
 				},{
 					property: 'transform',
-					properties:[
+					properties: [
 						{ name: 'Rotate X', property: 'transform-rotate-x'},
 						{ name: 'Rotate Y', property: 'transform-rotate-y'},
 						{ name: 'Rotate Z', property: 'transform-rotate-z'},
@@ -237,130 +237,130 @@ export default {
 					name: 'Direction',
 					property: 'flex-direction',
 					type: 'select',
-					defaults  : 'row',
+					defaults: 'row',
 					list: [{
-						value   : 'row',
-						name    : 'Row',
-						title   : 'Row'
+						value : 'row',
+						name: 'Row',
+						title : 'Row'
 					},{
-						value   : 'row-reverse',
-						name    : 'Row reverse',
-						title   : 'Row reverse'
+						value: 'row-reverse',
+						name: 'Row reverse',
+						title: 'Row reverse'
 					},{
-						value   : 'column',
-						name    : 'Column',
-						title   : 'Column'
+						value: 'column',
+						name: 'Column',
+						title: 'Column'
 					},{
-						value   : 'column-reverse',
-						name    : 'Column reverse',
-						title   : 'Column reverse'
+						value: 'column-reverse',
+						name: 'Column reverse',
+						title: 'Column reverse'
 					}],
 				},{
-					name      : 'Justify',
-					property  : 'justify-content',
-					type    : 'select',
-					defaults  : 'flex-start',
-					list    : [{
-						value   : 'flex-start',
-						name    : 'Start',
-						title   : 'Start'
-					},{
-						value   : 'flex-end',
-						name    : 'End',
-						title    : 'End'
-					},{
-						value   : 'space-between',
-						name: 'Space between',
-						title    : 'Space between'
-					},{
-						value   : 'space-around',
-						name: 'Space around',
-						title    : 'Space around'
-					},{
-						value   : 'center',
-						name: 'Center',
-						title    : 'Center'
-					}],
-				},{
-					name      : 'Align',
-					property  : 'align-items',
-					type    : 'select',
-					defaults  : 'center',
-					list    : [{
-						value   : 'flex-start',
+					name: 'Justify',
+					property: 'justify-content',
+					type: 'select',
+					defaults: 'flex-start',
+					list: [{
+						value: 'flex-start',
 						name: 'Start',
-						title    : 'Start'
+						title: 'Start'
 					},{
-						value   : 'flex-end',
+						value: 'flex-end',
 						name: 'End',
-						title    : 'End'
+						title: 'End'
 					},{
-						value   : 'stretch',
-						name: 'Stretch',
-						title    : 'Stretch'
+						value: 'space-between',
+						name: 'Space between',
+						title: 'Space between'
 					},{
-						value   : 'center',
+						value: 'space-around',
+						name: 'Space around',
+						title: 'Space around'
+					},{
+						value: 'center',
 						name: 'Center',
-						title    : 'Center'
+						title: 'Center'
+					}],
+				},{
+					name: 'Align',
+					property: 'align-items',
+					type: 'select',
+					defaults: 'center',
+					list: [{
+						value: 'flex-start',
+						name: 'Start',
+						title: 'Start'
+					},{
+						value : 'flex-end',
+						name: 'End',
+						title: 'End'
+					},{
+						value: 'stretch',
+						name: 'Stretch',
+						title: 'Stretch'
+					},{
+						value: 'center',
+						name: 'Center',
+						title: 'Center'
 					}],
 				},{
 					name: 'Flex Children',
 					property: 'label-parent-flex',
 					type: 'integer',
 				},{
-					name:     'Order',
-					property:   'order',
-					type:     'integer',
-					defaults :  0,
+					name: 'Order',
+					property: 'order',
+					type: 'integer',
+					defaults :0,
 					min: 0
 				},{
-					name    : 'Flex',
-					property  : 'flex',
-					type    : 'composite',
-					properties  : [{
-						name:     'Grow',
-						property:   'flex-grow',
-						type:     'integer',
-						defaults :  0,
+					name: 'Flex',
+					property: 'flex',
+					type: 'composite',
+					properties: [{
+						name: 'Grow',
+						property: 'flex-grow',
+						type: 'integer',
+						defaults :0,
 						min: 0
 					},{
-						name:     'Shrink',
-						property:   'flex-shrink',
-						type:     'integer',
-						defaults :  0,
+						name: 'Shrink',
+						property: 'flex-shrink',
+						type: 'integer',
+						defaults: 0,
 						min: 0
 					},{
-						name:     'Basis',
-						property:   'flex-basis',
-						type:     'integer',
-						units:    ['px','%',''],
+						name: 'Basis',
+						property: 'flex-basis',
+						type: 'integer',
+						units: ['px','%',''],
 						unit: '',
-						defaults :  'auto',
+						defaults: 'auto',
 					}],
 				},{
-					name      : 'Align',
-					property  : 'align-self',
-					type      : 'select',
-					defaults  : 'auto',
-					list    : [{
-						value   : 'auto',
-						name    : 'Auto',
+					name: 'Align',
+					property: 'align-self',
+					type: 'select',
+					defaults: 'auto',
+					list: [{
+						value: 'auto',
+						name: 'Auto',
 					},{
-						value   : 'flex-start',
+						value: 'flex-start',
 						name: 'Start',
-						title    : 'Start'
+						title: 'Start'
 					},{
-						value   : 'flex-end',
+						value: 'flex-end',
 						name: 'End',
-						title    : 'End'
+						title: 'End'
 					},{
-						value   : 'stretch',
+						value: 'stretch',
 						name: 'Stretch',
-						title    : 'Stretch'
+						title: 'Stretch'
 					},{
-						value   : 'center',
+						value: 'center',
 						name: 'Center',
-						title    : 'Center'
+						title: 'Center'
 					}]
 				}]
 			}

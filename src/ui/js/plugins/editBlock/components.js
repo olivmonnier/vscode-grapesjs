@@ -27,7 +27,7 @@ export default (editor, opts = {}) => {
         });
       },
       onBlockCodeChange() {
-        this.components(this.get(keyBlockCode))
+        this.components(this.get(keyBlockCode));
       }
     },
 
@@ -61,11 +61,11 @@ export default (editor, opts = {}) => {
       onActive() {
         const target = this.model;
         this.em.get('Commands').run(commandName, { target });
-      },
+      }
     }
-  })
+  });
 
   comps.addType(typeBlockCode, {
     extend: 'default'
-  })
-}
+  });
+};

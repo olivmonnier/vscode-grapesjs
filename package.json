@@ -20,8 +20,8 @@
 			"title": "Grapesjs panel configuration",
 			"properties": {
 				"grapesjs.delay": {
-					"type":"number",
-					"default":1500,
+					"type": "number",
+					"default": 1500,
 					"description": "Delay to wait before render after a document change."
 				},
 				"grapesjs.pluginsFolder": {

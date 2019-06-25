@@ -1,18 +1,15 @@
-import {
-  commandName,
-  keyBlockCode
-} from './config';
+import { commandName, keyBlockCode } from './config';
 
 export default (editor, opts = {}) => {
   const cmd = editor.Commands;
   const { modalTitle, codeViewOptions } = opts;
   const appendToContent = (target, content) => {
     if (content instanceof HTMLElement) {
-        target.appendChild(content);
+      target.appendChild(content);
     } else if (content) {
-        target.insertAdjacentHTML('beforeend', content);
+      target.insertAdjacentHTML('beforeend', content);
     }
-  }
+  };
 
   cmd.add(commandName, {
     run(editor, sender, opts = {}) {
@@ -23,7 +20,7 @@ export default (editor, opts = {}) => {
       const target = this.target;
 
       if (target && target.get('editable')) {
-        this.showBlockCode(target)
+        this.showBlockCode(target);
       }
     },
 
@@ -36,12 +33,11 @@ export default (editor, opts = {}) => {
       const title = options.title || modalTitle;
       const content = this.getContent();
 
-      let htmlContent = document.createElement('div')
-      htmlContent.innerHTML = target.toHTML()
-      htmlContent = htmlContent.firstChild.innerHTML
+      let htmlContent = document.createElement('div');
+      htmlContent.innerHTML = target.toHTML();
+      htmlContent = htmlContent.firstChild.innerHTML;
 
-      editor.Modal
-        .open({ title, content })
+      editor.Modal.open({ title, content })
         .getModel()
         .once('change:open', () => editor.stopCommand(this.id));
       this.getCodeViewer().setContent(htmlContent);
@@ -72,7 +68,7 @@ export default (editor, opts = {}) => {
       appendToContent(content, this.getPostContent());
       appendToContent(content, this.getContentActions());
       codeViewer.refresh();
-      setTimeout(()=> codeViewer.focus(), 0);
+      setTimeout(() => codeViewer.focus(), 0);
 
       return content;
     },
@@ -104,10 +100,10 @@ export default (editor, opts = {}) => {
           theme: 'hopscotch',
           readOnly: 0,
           ...codeViewOptions
-        })
+        });
       }
 
       return this.codeViewer;
     }
-  })
-}
+  });
+};

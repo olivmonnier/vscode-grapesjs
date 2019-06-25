@@ -1,25 +1,25 @@
 import { Uri, ExtensionContext } from 'vscode';
 import * as cheerio from 'cheerio';
-import { join } from "path";
+import { join } from 'path';
 import PluginsManager from './PluginsManager';
 import { getNonce } from './utils';
 
 export default class ContentProvider {
-	public static getContent(context: ExtensionContext, content?: string | undefined) {
-		const plugins = PluginsManager.getAll();
-		const pluginsFiles = plugins.map(({ path }) => {
-			return Uri.file(path || '').with({ scheme: 'vscode-resource' });
-		});
-		const vendorsUri = Uri.file(
-			join(context.extensionPath, '/out/ui/vendors.bundle.js')
-		).with({ scheme: 'vscode-resource' });
-		const scriptUri = Uri.file(
-			join(context.extensionPath, '/out/ui/app.bundle.js')
-		).with({ scheme: 'vscode-resource' });
+  public static getContent(context: ExtensionContext, content?: string | undefined) {
+    const plugins = PluginsManager.getAll();
+    const pluginsFiles = plugins.map(({ path }) => {
+      return Uri.file(path || '').with({ scheme: 'vscode-resource' });
+    });
+    const vendorsUri = Uri.file(
+      join(context.extensionPath, '/out/ui/vendors.bundle.js')
+    ).with({ scheme: 'vscode-resource' });
+    const scriptUri = Uri.file(join(context.extensionPath, '/out/ui/app.bundle.js')).with({
+      scheme: 'vscode-resource'
+    });
 
-		const nonce = getNonce();
-	
-		return `<!DOCTYPE html>
+    const nonce = getNonce();
+
+    return `<!DOCTYPE html>
 						<html lang="en">
 						<head>
 							<meta charset="UTF-8">
@@ -33,10 +33,19 @@ export default class ContentProvider {
 							<meta name="viewport" content="width=device-width, initial-scale=1.0">
 							<title>GrapesJS</title>
 							<script nonce="${nonce}" src="${vendorsUri}"></script>
-							${pluginsFiles.map(plugin => `<script nonce="${nonce}" src="${plugin ? plugin : ''}"></script>`).join('')}
+							${pluginsFiles
+                .map(
+                  plugin =>
+                    `<script nonce="${nonce}" src="${plugin ? plugin : ''}"></script>`
+                )
+                .join('')}
 							<script nonce="${nonce}">
-								window.plugins = ${JSON.stringify(plugins.map(plugin => plugin ? plugin.name : ''))}
-								window.pluginsOptions = ${JSON.stringify(plugins.map(plugin => plugin ? { options: plugin.options, name: plugin.name } : {}))}
+								window.plugins = ${JSON.stringify(plugins.map(plugin => (plugin ? plugin.name : '')))}
+								window.pluginsOptions = ${JSON.stringify(
+                  plugins.map(plugin =>
+                    plugin ? { options: plugin.options, name: plugin.name } : {}
+                  )
+                )}
 							</script>
 						</head>
 						<body>
@@ -44,7 +53,7 @@ export default class ContentProvider {
 								<div class="editor-row">
 									<div class="editor-canvas">
 										<div id="gjs">
-											${content || "<h1>Hello World Component!</h1>"}
+											${content || '<h1>Hello World Component!</h1>'}
 										</div>
 									</div>
 									<div class="panel__right">
@@ -62,15 +71,15 @@ export default class ContentProvider {
 							<script nonce="${nonce}" src="${scriptUri}"></script>
 						</body>
 						</html>`;
-	}
+  }
 
-	public static exportMockup(html: string, css: string) { 
-		let mockup;
+  public static exportMockup(html: string, css: string) {
+    let mockup;
 
-		if (this._isHeadInHtml(html)) {
-			mockup = html;
-		} else {
-			mockup = `<!DOCTYPE html>
+    if (this._isHeadInHtml(html)) {
+      mockup = html;
+    } else {
+      mockup = `<!DOCTYPE html>
 			<html lang="en">
 				<head>
 					<meta charset="UTF-8">
@@ -78,23 +87,23 @@ export default class ContentProvider {
 					<title></title>
 				</head>
 				<body>${html}</body>
-			</html>`
-		}
-		
-		return this._addCssInHtml(mockup, css);
-	}
+			</html>`;
+    }
 
-	private static _isHeadInHtml(html: string) {
-		const $ = cheerio.load(html);
+    return this._addCssInHtml(mockup, css);
+  }
 
-		return $('head').length > 0;
-	}
+  private static _isHeadInHtml(html: string) {
+    const $ = cheerio.load(html);
 
-	private static _addCssInHtml(html: string, css: string) {
-		const $ = cheerio.load(html);
+    return $('head').length > 0;
+  }
 
-		$('head').append(`<style>${css}</style>`);
+  private static _addCssInHtml(html: string, css: string) {
+    const $ = cheerio.load(html);
 
-		return $.html();
-	}
+    $('head').append(`<style>${css}</style>`);
+
+    return $.html();
+  }
 }
