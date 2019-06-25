@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
-import { join } from 'path';
+import { resolve } from 'path';
 import { getNestedObject } from './utils';
 
 export default class PluginsManager {
@@ -11,15 +11,15 @@ export default class PluginsManager {
       vscode.workspace.getConfiguration().get('grapesjs.pluginsFolder') || './';
     const workspaceFolderPath = vscode.workspace.workspaceFolders[0].uri.fsPath;
 
-    const srcPath = join(workspaceFolderPath, pluginsFolderPath);
+    const srcPath = resolve(workspaceFolderPath, pluginsFolderPath);
     const pluginsFolders = this._getDirectories(srcPath);
     const pluginsConfig = pluginsFolders.map(folder =>
-      this._getConfig(join(srcPath, folder))
+      this._getConfig(resolve(srcPath, folder))
     );
 
     return pluginsConfig
       .map((config, i) => {
-        return config ? this._loadPlugin(join(srcPath, pluginsFolders[i]), config) : {};
+        return config ? this._loadPlugin(resolve(srcPath, pluginsFolders[i]), config) : {};
       })
       .filter(this._validPlugin);
   }
@@ -27,14 +27,14 @@ export default class PluginsManager {
   private static _getDirectories(srcPath: string) {
     return fs
       .readdirSync(srcPath)
-      .filter(file => fs.statSync(join(srcPath, file)).isDirectory());
+      .filter(file => fs.statSync(resolve(srcPath, file)).isDirectory());
   }
 
   private static _getConfig(srcPath: string) {
-    if (fs.existsSync(join(srcPath, 'package.json'))) {
+    if (fs.existsSync(resolve(srcPath, 'package.json'))) {
       try {
         const contentConfig = fs
-          .readFileSync(join(srcPath, 'package.json'))
+          .readFileSync(resolve(srcPath, 'package.json'))
           .toString('utf8');
         const jsonConfig = JSON.parse(contentConfig);
 
@@ -53,7 +53,7 @@ export default class PluginsManager {
     config: { lib: string; name: string; main: string; options?: any }
   ) {
     const { lib, name, main, options } = config;
-    const path = join(srcPath, lib || main);
+    const path = resolve(srcPath, lib || main);
 
     return fs.existsSync(path) ? { options: options || {}, path, name } : {};
   }
