@@ -53,7 +53,7 @@ export default class ContentProvider {
 								<div class="editor-row">
 									<div class="editor-canvas">
 										<div id="gjs">
-											${content || '<h1>Hello World Component!</h1>'}
+											${content || this.getTemplate()}
 										</div>
 									</div>
 									<div class="panel__right">
@@ -91,6 +91,50 @@ export default class ContentProvider {
     }
 
     return this._addCssInHtml(mockup, css);
+  }
+
+  private static getTemplate() {
+    return `<!DOCTYPE html>
+		<html>
+			<head>
+				<link href="https://fonts.googleapis.com/css?family=Signika&display=swap" rel="stylesheet">
+				<style>
+					html, body {
+						margin: 0;
+						padding: 0;
+						height: 100%;
+					}
+					body {
+						position: relative;
+						font-family: Arial, Helvetica, sans-serif;
+						background: linear-gradient(#101452 10%, #131862 55%, #546bab);
+					}
+					.jumbotron {
+						margin: 0;
+						padding: 50px;
+						position: absolute;
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%, -50%);
+						border-radius: 25%;
+						color: #fff;
+					}
+					.jumbotron h1 {
+						font-family: 'Signika', sans-serif;
+						text-transform: uppercase;
+						text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080, 0 0 30px #ff0080, 0 0 40px #ff0080;
+					}
+					.text-center {
+						text-align: center;
+					}
+				</style>
+			</head>
+			<body>
+				<div class="jumbotron">
+					<h1 class="text-center">Ready to Build <br/>with GrapesJS&nbsp;!!!</h1>
+				</div>
+			</body>
+		</html>`;
   }
 
   private static _isHeadInHtml(html: string) {
