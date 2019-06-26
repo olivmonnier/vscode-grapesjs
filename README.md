@@ -1,6 +1,6 @@
 <h1 align="center">GrapesJS Editor into VS Code</h1>
 <p>
-  <img src="https://img.shields.io/badge/version-0.0.8-blue.svg?cacheSeconds=2592000" />
+  <img src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
   <img src="https://img.shields.io/badge/vscode-%5E1.35.0-blue.svg" />
   <a href="https://github.com/olivmonnier/vscode-grapesjs#readme">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" target="_blank" />
@@ -13,6 +13,9 @@
   </a>
 </p>
 
+Web Builder Framework which helps building HTML templates, faster and easily into VS Code.
+
+<p alig="center"><img src="./screen.png"/></p>
 
 ## Getting started
 
