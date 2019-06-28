@@ -15,6 +15,9 @@ export default class ContentProvider {
     const vendorsUri = Uri.file(
       join(context.extensionPath, '/out/ui/vendors.bundle.js')
     ).with({ scheme: 'vscode-resource' });
+    const grapesUri = Uri.file(join(context.extensionPath, '/out/ui/grapes.min.js')).with({
+      scheme: 'vscode-resource'
+    });
     const scriptUri = Uri.file(join(context.extensionPath, '/out/ui/app.bundle.js')).with({
       scheme: 'vscode-resource'
     });
@@ -35,6 +38,7 @@ export default class ContentProvider {
 							<meta name="viewport" content="width=device-width, initial-scale=1.0">
 							<title>GrapesJS</title>
 							<script nonce="${nonce}" src="${vendorsUri}"></script>
+							<script nonce="${nonce}" src="${grapesUri}"></script>
 							${pluginsFiles
                 .map(
                   plugin =>
