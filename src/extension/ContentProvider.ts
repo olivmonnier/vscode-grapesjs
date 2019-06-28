@@ -2,13 +2,15 @@ import { Uri, ExtensionContext } from 'vscode';
 import * as cheerio from 'cheerio';
 import { join } from 'path';
 import PluginsManager from './PluginsManager';
-import { getNonce } from './utils';
+import { getNonce, isURL } from './utils';
 
 export default class ContentProvider {
   public static getContent(context: ExtensionContext, content?: string | undefined) {
     const plugins = PluginsManager.getAll();
     const pluginsFiles = plugins.map(({ path }) => {
-      return Uri.file(path || '').with({ scheme: 'vscode-resource' });
+      const p = path || '';
+
+      return !isURL(p) ? Uri.file(p).with({ scheme: 'vscode-resource' }) : p;
     });
     const vendorsUri = Uri.file(
       join(context.extensionPath, '/out/ui/vendors.bundle.js')

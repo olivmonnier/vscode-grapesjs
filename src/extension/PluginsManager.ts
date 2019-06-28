@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import { resolve } from 'path';
-import { getNestedObject } from './utils';
+import { getNestedObject, isURL } from './utils';
 
 export default class PluginsManager {
   public static getAll() {
@@ -53,9 +53,10 @@ export default class PluginsManager {
     config: { lib: string; name: string; main: string; options?: any }
   ) {
     const { lib, name, main, options } = config;
-    const path = resolve(srcPath, lib || main);
+    const p = lib || main;
+    const path = !isURL(p) ? resolve(srcPath, p) : p;
 
-    return fs.existsSync(path) ? { options: options || {}, path, name } : {};
+    return fs.existsSync(path) || isURL(path) ? { options: options || {}, path, name } : {};
   }
 
   private static _validPlugin(plugin: any) {

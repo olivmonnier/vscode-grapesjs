@@ -15,7 +15,7 @@
 
 Web Builder Framework which helps building HTML templates, faster and easily into VS Code.
 
-<p alig="center"><img src="screen.PNG"/></p>
+<p alig="center"><img src="https://github.com/olivmonnier/vscode-grapesjs/blob/master/screen.PNG"/></p>
 
 ## Getting started
 
@@ -39,7 +39,7 @@ Web Builder Framework which helps building HTML templates, faster and easily int
   ...
   "vscode": {
     "grapesjs": { // or just true if there's no configuration
-      "lib": "./index.js", // (optional) use main property if it's the same path
+      "lib": "./index.js", // (optional) use main property if it's the same path, also an url http(s) worked
       "options": { 
         ... // (optional) options to use in your plugin
       }

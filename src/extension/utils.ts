@@ -26,3 +26,9 @@ export function getNonce() {
   }
   return text;
 }
+
+export function isURL(str: string) {
+  const urlRegex = '^(?:http|https|ftp)://';
+  const url = new RegExp(urlRegex, 'i');
+  return url.test(str);
+}
