@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
 import ContentProvider from './ContentProvider';
-import { debounced } from './utils';
 
 let timerId: NodeJS.Timeout;
 
@@ -138,12 +137,14 @@ export default class GrapesEditorManager {
         this._panel.webview.postMessage({
           command: 'loading'
         });
+
+        if (timerId) clearTimeout(timerId);
+
+        timerId = setTimeout(() => {
+          this.onChangeTextDocument(event);
+        }, delay);
       }
     });
-
-    vscode.workspace.onDidChangeTextDocument(
-      debounced(delay, this.onChangeTextDocument.bind(this))
-    );
   }
 
   public dispose() {
