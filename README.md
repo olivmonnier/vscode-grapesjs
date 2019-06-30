@@ -15,7 +15,7 @@
 
 Web Builder Framework which helps building HTML templates, faster and easily into VS Code.
 
-<p alig="center"><img src="https://github.com/olivmonnier/vscode-grapesjs/blob/master/screen.PNG"/></p>
+<p alig="center"><img src="screen.PNG"/></p>
 
 ## Getting started
 
