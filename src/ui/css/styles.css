@@ -1,3 +1,7 @@
+:root {
+	--bg-panel-header: rgba(128, 128, 128, 0.2);
+	--bg-panel: rgb(37, 37, 38);
+}
 html, body {
 	margin: 0;
 	padding: 0;
@@ -6,6 +10,21 @@ html, body {
 }
 body {
 	background-color: aliceblue;
+}
+
+body.loading {
+	overflow: hidden;
+}
+body.loading:after {
+	content: ' ';
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #000;
+	opacity: .7;
+	z-index: 1;
 }
 
 #root {
@@ -27,6 +46,19 @@ body {
 	width: 100%;
 }
 
+.gjs-one-bg {
+	background-color: var(--bg-panel);
+}
+
+.gjs-pn-panel, .gjs-layer {
+	background-color: var(--bg-panel-header);
+}
+
+.gjs-sm-label {
+	color: #ffca6f;
+  fill: #ffca6f;
+}
+
 .editor-row {
   display: flex;
   justify-content: flex-start;
@@ -45,8 +77,10 @@ body {
 	flex-basis: 300px;
 	flex-direction: column;
 	position: relative;
+	padding-top: 0;
 	display: flex;
 	overflow-y: auto;
+	background-color: var(--bg-panel);
 }
 
 .panel__switcher, .panel__basic-actions {
@@ -57,4 +91,11 @@ body {
 .panel__content {
 	flex: 1;
 	overflow-y: auto;
+}
+
+.panel__basic-actions:empty {
+	display: none;
+}
+.panel__basic-actions .gjs-pn-buttons {
+	flex-direction: row-reverse;
 }
